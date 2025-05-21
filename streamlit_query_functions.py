@@ -35,7 +35,7 @@ def setup_gcp_credentials():
     #     # If running locally and GOOGLE_APPLICATION_CREDENTIALS is set, proceed
     #     # No need to do anything further here as the environment variable is already set
 
-    if hasattr(st, 'secrets') and 'gcp_service_account_json' in st.secrets:
+    if hasattr(st, 'secrets') and 'google_application_credentials' in st.secrets:
         st.info("Using GCP credentials from Streamlit secrets.")
         try:
             # Get the JSON string from secrets
@@ -56,7 +56,7 @@ def setup_gcp_credentials():
             st.error(f"Error setting up GCP credentials from secrets: {e}")
             st.stop()
     else:
-        st.warning("GCP credentials (GOOGLE_APPLICATION_CREDENTIALS or 'gcp_service_account_json' in secrets) not found. Vertex AI Embeddings may fail.")
+        st.warning("GCP credentials (GOOGLE_APPLICATION_CREDENTIALS or 'google_application_credentials' in secrets) not found. Vertex AI Embeddings may fail.")
         # If running locally without a .env file, this will stop here
         # st.stop() # Uncomment if you want to strictly enforce credentials
 
