@@ -52,7 +52,7 @@ def setup_gcp_credentials():
             st.success(f"GCP credentials set from Streamlit secrets. Temp file: {temp_file_path}")
             with open(temp_file_path, 'r') as file:
               json_data = json.load(file)
-              print(json.dumps(json_data))
+              print(json.dumps(json_data,strict=False))
 
         except Exception as e:
             st.error(f"Error setting up GCP credentials from secrets: {e}")
