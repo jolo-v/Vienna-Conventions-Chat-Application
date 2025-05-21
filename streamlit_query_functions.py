@@ -11,7 +11,7 @@ from langchain_core.messages import HumanMessage
 import streamlit as st
 import tempfile
 
-load_dotenv()
+#load_dotenv()
 
 # #vector db details
 # ATLAS_CONNECTION_STRING = os.getenv("ATLAS_CONNECTION_STRING")
