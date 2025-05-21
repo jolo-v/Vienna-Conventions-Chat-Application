@@ -8,14 +8,22 @@ from langchain.chains import create_retrieval_chain, create_history_aware_retrie
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage
+import streammlit as st
 
 load_dotenv()
 
-#vector db details
-ATLAS_CONNECTION_STRING = os.getenv("ATLAS_CONNECTION_STRING")
-DB_NAME = os.getenv("DB_NAME")
-COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("ATLAS_VECTOR_SEARCH_INDEX_NAME")
+# #vector db details
+# ATLAS_CONNECTION_STRING = os.getenv("ATLAS_CONNECTION_STRING")
+# DB_NAME = os.getenv("DB_NAME")
+# COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("ATLAS_VECTOR_SEARCH_INDEX_NAME")
+
+ATLAS_CONNECTION_STRING = st.secrets["atlas_commection_string"]
+DB_NAME = st.secrets["db_name"]
+COLLECTION_NAME = st.secrets["collection_name"]
+ATLAS_VECTOR_SEARCH_INDEX_NAME = st.secrets["atlas_vector_search_index_name"]
+GOOGLE_API_KEY = st.secrets["google_api_key"]
+GOOGLE_APPLICATION_CREDENTIALS = st.secrets["google_application_credentials"]
 
 #Instantiate vector store
 embeddings = VertexAIEmbeddings('text-embedding-005')
