@@ -54,14 +54,6 @@ def setup_gcp_credentials():
 
             st.success(f"GCP credentials set from Streamlit secrets. Temp file: {temp_file_path}")
 
-            try:
-                with open(temp_file_path, 'r') as f:
-                    temp_file_content = f.read()
-                st.code(temp_file_content, language="json")
-            except Exception as e:
-                st.error(f"Could not read temporary file content: {e}")
-
-
         except Exception as e:
             st.error(f"Error setting up GCP credentials from secrets: {e}")
             st.stop()
@@ -87,6 +79,7 @@ except Exception as e:
 #Instantiate vector store
 # embeddings = VertexAIEmbeddings('text-embedding-005')
 namespace = (DB_NAME + "." + COLLECTION_NAME)
+st.write(namespace)
 
 vector_store = MongoDBAtlasVectorSearch.from_connection_string(
   connection_string = ATLAS_CONNECTION_STRING,
