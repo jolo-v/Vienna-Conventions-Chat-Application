@@ -11,6 +11,7 @@ from langchain_core.messages import HumanMessage
 import streamlit as st
 import tempfile
 import json
+import base64
 
 #load_dotenv()
 
@@ -39,7 +40,8 @@ def setup_gcp_credentials():
         st.info("Using GCP credentials from Streamlit secrets.")
         try:
             # Get the JSON string from secrets
-            service_account_info = st.secrets["google_application_credentials"]
+            encoded_json = st.secrets["google_application_credentials"]
+            service_account_info = base64.b64decode(encoded_json).decode('utf-8')
 
             # Write the JSON string to a temporary file
             # This is crucial because google-auth expects a file path
