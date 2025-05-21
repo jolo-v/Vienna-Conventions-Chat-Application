@@ -12,7 +12,7 @@ import streamlit as st
 import tempfile
 import json
 
-# load_dotenv()
+#load_dotenv()
 
 # #vector db details
 # ATLAS_CONNECTION_STRING = os.getenv("ATLAS_CONNECTION_STRING")
@@ -30,12 +30,12 @@ GOOGLE_API_KEY = st.secrets["google_api_key"]
 ##Handle Vertex AI secrets
 def setup_gcp_credentials():
     # Check if running locally (with .env) or on Streamlit Cloud (with st.secrets)
-    # if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
-    #     st.info("Using GCP credentials from GOOGLE_APPLICATION_CREDENTIALS env variable.")
-    #     # If running locally and GOOGLE_APPLICATION_CREDENTIALS is set, proceed
-    #     # No need to do anything further here as the environment variable is already set
+    if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
+        st.info("Using GCP credentials from GOOGLE_APPLICATION_CREDENTIALS env variable.")
+        # If running locally and GOOGLE_APPLICATION_CREDENTIALS is set, proceed
+        # No need to do anything further here as the environment variable is already set
 
-    if hasattr(st, 'secrets') and 'google_application_credentials' in st.secrets:
+    elif hasattr(st, 'secrets') and 'gcp_service_account_json' in st.secrets:
         st.info("Using GCP credentials from Streamlit secrets.")
         try:
             # Get the JSON string from secrets
@@ -49,10 +49,8 @@ def setup_gcp_credentials():
 
             # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = temp_file_path
+
             st.success(f"GCP credentials set from Streamlit secrets. Temp file: {temp_file_path}")
-            with open(temp_file_path, 'r') as file:
-              json_data = json.load(file)
-              print(json.dumps(json_data,strict=False))
 
         except Exception as e:
             st.error(f"Error setting up GCP credentials from secrets: {e}")
@@ -68,12 +66,13 @@ setup_gcp_credentials()
 try:
     # VertexAIEmbeddings will now automatically pick up the GOOGLE_APPLICATION_CREDENTIALS
     # from the environment variable we just set.
-    embeddings = VertexAIEmbeddings('text-embedding-005',project="primal-sunup-459905-j2") # Specify your desired model
+    embeddings = VertexAIEmbeddings('text-embedding-005') # Specify your desired model
     st.success("VertexAIEmbeddings initialized successfully!")
 
 except Exception as e:
     st.error(f"Failed to initialize VertexAIEmbeddings. Check your GCP credentials and permissions: {e}")
     st.stop()
+
 
 #Instantiate vector store
 # embeddings = VertexAIEmbeddings('text-embedding-005')
