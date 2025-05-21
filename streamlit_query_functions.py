@@ -48,7 +48,6 @@ def setup_gcp_credentials():
 
             # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = temp_file_path
-
             st.success(f"GCP credentials set from Streamlit secrets. Temp file: {temp_file_path}")
 
         except Exception as e:
@@ -65,6 +64,7 @@ setup_gcp_credentials()
 try:
     # VertexAIEmbeddings will now automatically pick up the GOOGLE_APPLICATION_CREDENTIALS
     # from the environment variable we just set.
+    GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
     embeddings = VertexAIEmbeddings('text-embedding-005',project="primal-sunup-459905-j2") # Specify your desired model
     st.success("VertexAIEmbeddings initialized successfully!")
 
