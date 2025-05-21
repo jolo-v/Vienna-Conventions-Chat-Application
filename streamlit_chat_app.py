@@ -2,7 +2,7 @@ import streamlit as st
 from dotenv import load_dotenv
 from streamlit_query_functions import query
 
-load_dotenv()
+#load_dotenv()
 
 #Page title
 st.title("Vienna Conventions Chat App")
