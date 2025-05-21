@@ -10,8 +10,9 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage
 import streamlit as st
 import tempfile
+import json
 
-#load_dotenv()
+# load_dotenv()
 
 # #vector db details
 # ATLAS_CONNECTION_STRING = os.getenv("ATLAS_CONNECTION_STRING")
@@ -49,6 +50,9 @@ def setup_gcp_credentials():
             # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = temp_file_path
             st.success(f"GCP credentials set from Streamlit secrets. Temp file: {temp_file_path}")
+            with open(temp_file_path, 'r') as file:
+              json_data = json.load(file)
+              print(json.dumps(json_data))
 
         except Exception as e:
             st.error(f"Error setting up GCP credentials from secrets: {e}")
@@ -64,7 +68,6 @@ setup_gcp_credentials()
 try:
     # VertexAIEmbeddings will now automatically pick up the GOOGLE_APPLICATION_CREDENTIALS
     # from the environment variable we just set.
-    GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
     embeddings = VertexAIEmbeddings('text-embedding-005',project="primal-sunup-459905-j2") # Specify your desired model
     st.success("VertexAIEmbeddings initialized successfully!")
 
@@ -73,7 +76,7 @@ except Exception as e:
     st.stop()
 
 #Instantiate vector store
-#embeddings = VertexAIEmbeddings('text-embedding-005')
+# embeddings = VertexAIEmbeddings('text-embedding-005')
 namespace = (DB_NAME + "." + COLLECTION_NAME)
 
 vector_store = MongoDBAtlasVectorSearch.from_connection_string(
