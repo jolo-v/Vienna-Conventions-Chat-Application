@@ -65,7 +65,7 @@ setup_gcp_credentials()
 try:
     # VertexAIEmbeddings will now automatically pick up the GOOGLE_APPLICATION_CREDENTIALS
     # from the environment variable we just set.
-    embeddings = VertexAIEmbeddings('text-embedding-005') # Specify your desired model
+    embeddings = VertexAIEmbeddings('text-embedding-005',project="primal-sunup-459905-j2") # Specify your desired model
     st.success("VertexAIEmbeddings initialized successfully!")
 
 except Exception as e:
