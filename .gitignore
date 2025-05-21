@@ -1,0 +1,7 @@
+*.env
+primal-sunup-459905-j2-37be0f3601d8.json
+*.tmp
+npm-debug.log
+*.DS_Store
+node_modules
+langchain_env/
