@@ -30,12 +30,12 @@ GOOGLE_API_KEY = st.secrets["google_api_key"]
 ##Handle Vertex AI secrets
 def setup_gcp_credentials():
     # Check if running locally (with .env) or on Streamlit Cloud (with st.secrets)
-    if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
-        st.info("Using GCP credentials from GOOGLE_APPLICATION_CREDENTIALS env variable.")
-        # If running locally and GOOGLE_APPLICATION_CREDENTIALS is set, proceed
-        # No need to do anything further here as the environment variable is already set
+    # if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
+    #     st.info("Using GCP credentials from GOOGLE_APPLICATION_CREDENTIALS env variable.")
+    #     # If running locally and GOOGLE_APPLICATION_CREDENTIALS is set, proceed
+    #     # No need to do anything further here as the environment variable is already set
 
-    elif hasattr(st, 'secrets') and 'gcp_service_account_json' in st.secrets:
+    if hasattr(st, 'secrets') and 'gcp_service_account_json' in st.secrets:
         st.info("Using GCP credentials from Streamlit secrets.")
         try:
             # Get the JSON string from secrets
