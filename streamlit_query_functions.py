@@ -24,6 +24,7 @@ import base64
 #Set API keys from st.secrets except for VertexAI keys
 ATLAS_CONNECTION_STRING = st.secrets["atlas_connection_string"]
 DB_NAME = st.secrets["db_name"]
+DB_PASSWORD = st.secrets["db_password"]
 COLLECTION_NAME = st.secrets["collection_name"]
 ATLAS_VECTOR_SEARCH_INDEX_NAME = st.secrets["atlas_vector_search_index_name"]
 GOOGLE_API_KEY = st.secrets["google_api_key"]
