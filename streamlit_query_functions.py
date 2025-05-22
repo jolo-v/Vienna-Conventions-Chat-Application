@@ -80,7 +80,6 @@ except Exception as e:
 #Instantiate vector store
 # embeddings = VertexAIEmbeddings('text-embedding-005')
 namespace = (DB_NAME + "." + COLLECTION_NAME)
-st.write(namespace)
 
 vector_store = MongoDBAtlasVectorSearch.from_connection_string(
   connection_string = ATLAS_CONNECTION_STRING,
