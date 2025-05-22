@@ -13,14 +13,6 @@ import tempfile
 import json
 import base64
 
-#load_dotenv()
-
-# #vector db details
-# ATLAS_CONNECTION_STRING = os.getenv("ATLAS_CONNECTION_STRING")
-# DB_NAME = os.getenv("DB_NAME")
-# COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("ATLAS_VECTOR_SEARCH_INDEX_NAME")
-
 #Set API keys from st.secrets except for VertexAI keys
 ATLAS_CONNECTION_STRING = st.secrets["atlas_connection_string"]
 DB_NAME = st.secrets["db_name"]
@@ -31,11 +23,6 @@ GOOGLE_API_KEY = st.secrets["google_api_key"]
 
 ##Handle Vertex AI secrets
 def setup_gcp_credentials():
-    # Check if running locally (with .env) or on Streamlit Cloud (with st.secrets)
-    # if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
-    #     st.info("Using GCP credentials from GOOGLE_APPLICATION_CREDENTIALS env variable.")
-    #     # If running locally and GOOGLE_APPLICATION_CREDENTIALS is set, proceed
-    #     # No need to do anything further here as the environment variable is already set
 
     if hasattr(st, 'secrets') and 'google_application_credentials' in st.secrets:
         st.info("Using GCP credentials from Streamlit secrets.")
@@ -78,7 +65,6 @@ except Exception as e:
 
 
 #Instantiate vector store
-# embeddings = VertexAIEmbeddings('text-embedding-005')
 namespace = (DB_NAME + "." + COLLECTION_NAME)
 
 vector_store = MongoDBAtlasVectorSearch.from_connection_string(
