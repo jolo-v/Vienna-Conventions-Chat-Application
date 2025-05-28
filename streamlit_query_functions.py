@@ -90,7 +90,7 @@ chathist_prompt = ChatPromptTemplate.from_messages(
      )
 
 #Configure main question and answer prompt
-qa_system_prompt = """You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.
+qa_system_prompt = """You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. Only entertain questions that can be answered from retrieved context. If you don't know the answer, just say that you don't know. If user asks questions that do not pertain to retrieved context, just say that you can't answer. Use three sentences maximum and keep the answer concise.
 {context} 
 """
 qa_prompt = ChatPromptTemplate.from_messages(
