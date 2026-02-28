@@ -75,7 +75,7 @@ vector_store = MongoDBAtlasVectorSearch.from_connection_string(
 )
 
 #Define model
-model = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
+model = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
 
 #Initialize chat history
 chat_history = []
